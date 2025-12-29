@@ -1,0 +1,25 @@
+{application, execvp,
+ [{description, "Replace the ErlangVM with an OS system command"},
+  {vsn, "1.0.0"},
+  {registered, []},
+  {applications,
+   [kernel,
+    stdlib
+   ]},
+  {env,[]},
+  {modules, []},
+  {licenses, ["Apache-2.0"]},
+  {links, [{"GitHub", "https://github.com/bsanyi/execvp"}]},
+  {include_paths, [
+    "c_src/execvp.c",
+    "c_src/Makefile",
+    "test/execvp_test.erl",
+    "src",
+    "README*",
+    "LICENSE*",
+    "priv",
+    "rebar.config"
+  ]},
+  {doc, "doc"}
+ ]
+}.
