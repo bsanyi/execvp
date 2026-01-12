@@ -7,14 +7,28 @@ tools** that need to replace themselves with another process as their final
 step. This means when that other process exits, execution does not return to
 the BEAM.
 
+## Erlang:
+
 ```erlang
   execvp:cmd("git", ["help", "rebase"]).
+  execvp:'cmd!'("git", ["help", "rebase"]).
 ```
 
-> ⚠️  **Warning:** Calling `execvp:cmd/2` **replaces the current BEAM process**.
-> Any further Erlang/Elixir code will not run. Concurrent BEAM processes are
-> brutally killed. Use this only if you know what you are doing. Otherwise
-> consider using ports or `os:cmd`.
+## Elixir:
+
+```elixir
+  :execvp.cmd("git", ["help", "rebase"])
+  :execvp.cmd!("git", ["help", "rebase"])
+```
+
+The difference between `cmd` and `cmd!` is that the formar may return an error
+tuple in case of an error (like a non existent command), but the latter always
+crashes the entire BEAM in case of an error.
+
+> ⚠️  **Warning:** Calling `execvp:cmd` or `cmd!` **replaces the current BEAM
+> process**.  Any further Erlang/Elixir code will not run. Concurrent BEAM
+> processes are brutally killed. Use this only if you know what you are doing.
+> Otherwise consider using ports or `os:cmd`.
 
 ---
 

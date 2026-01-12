@@ -1,6 +1,6 @@
 {application, execvp,
  [{description, "Replace the ErlangVM with an OS system command"},
-  {vsn, "1.0.0"},
+  {vsn, "1.1.0"},
   {registered, []},
   {applications,
    [kernel,

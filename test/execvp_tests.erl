@@ -24,7 +24,7 @@ non_executable_test() ->
     ?assertMatch({error, _PermissionDeinedMessage}, Result).
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-exec_exit_code_test() ->
+exec_successful_call_test() ->
     FileName = "/tmp/temp_file_for_execvp_testing",
     {ok, Tmp} = file:open(FileName, [write]),
     file:close(Tmp),

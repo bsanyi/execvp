@@ -1,12 +1,19 @@
 CFLAGS ?= -fPIC -O3 -Wall
-LDFLAGS ?= -shared
+
+ifeq ($(shell uname),Darwin)
+	LDFLAGS += -dynamiclib -undefined dynamic_lookup
+else
+	LDFLAGS += -shared
+endif
+
 SOURCE = execvp.c
 TARGET = execvp.so
 ERL ?= erl
 ERL_INCLUDE := $(shell $(ERL) -eval 'io:format("~s",[code:root_dir()]), init:stop()' -noshell)/usr/include
 
 all:
-	$(CC) $(CFLAGS) -I$(ERL_INCLUDE) -o ../priv/$(TARGET) $(SOURCE) $(LDFLAGS)
+	mkdir -p ../priv/
+	$(CC) $(CFLAGS) $(LDFLAGS) -I$(ERL_INCLUDE) -o ../priv/$(TARGET) $(SOURCE)
 
 clean:
 	rm -f ../priv/$(TARGET)

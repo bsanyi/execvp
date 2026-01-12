@@ -1,7 +1,7 @@
 -module(execvp).
 
 -on_load(init/0).
--export([cmd/2]).
+-export([cmd/2, 'cmd!'/2]).
 
 init() ->
   PrivDir =
@@ -15,4 +15,8 @@ init() ->
   {error, Reason :: binary()} | no_return().
 cmd(_Cmd, _Args) ->
   erlang:nif_error(not_loaded).
+
+'cmd!'(Cmd, Args) ->
+  execvp:cmd(Cmd, Args),
+  erlang:halt(1).
 
